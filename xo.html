@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XO Game</title>
+<link rel="stylesheet" href="XO.css">
+</head>
+<body>
+
+<div id="start-message" class="start-screen">
+    <h1>Welcome to XO❦</h1>
+    <div class="start-buttons">
+        <button onclick="startGame()">START</button>
+    </div>
+</div>
+
+<div class="container" id="game-container" style="display: none;">
+    <div class="side-bar">
+        <div class="info-box">
+            <p>Round: <span id="round">1</span>/3</p>
+        </div>
+        <div class="info-box">
+            <p>Time Elapsed: <span id="timer">00:00</span></p>
+        </div>
+        <div class="info-box">
+            <p>Choose Your Symbol:</p>
+            <div class="symbols-side">
+                <button onclick="selectSymbol('X')">X</button>
+                <button onclick="selectSymbol('O')">O</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-center">
+        <div class="symbol-selection">
+            <div class="symbols-main">
+              
+            </div>
+        </div>
+
+        <div id="game-board" class="board">
+            <div class="cell" onclick="makeMove(this, 0)"></div>
+            <div class="cell" onclick="makeMove(this, 1)"></div>
+            <div class="cell" onclick="makeMove(this, 2)"></div>
+            <div class="cell" onclick="makeMove(this, 3)"></div>
+            <div class="cell" onclick="makeMove(this, 4)"></div>
+            <div class="cell" onclick="makeMove(this, 5)"></div>
+            <div class="cell" onclick="makeMove(this, 6)"></div>
+            <div class="cell" onclick="makeMove(this, 7)"></div>
+            <div class="cell" onclick="makeMove(this, 8)"></div>
+        </div>
+
+        <div class="controls">
+            <button onclick="resetGame()">PLAY AGAIN</button>
+            <p id="message"></p>
+        </div>
+    </div>
+
+    <div class="dynamic-background">
+        <div class="light-layer layer1"></div>
+        <div class="light-layer layer2"></div>
+        <div class="light-layer layer3"></div>
+    </div>
+</div>
+
+<div id="result-screen" class="result-screen" style="display: none;">
+    <h1 id="result-message"></h1>
+    <button onclick="restartGame()">PLAY AGAIN</button>
+</div>
+
+<script src="XOXOXO.js"></script>
+<script>
+const container = document.getElementById('game-container');
+const startScreen = document.getElementById('start-message');
+
+function startGame() {
+    startScreen.style.display = 'none';
+    container.style.display = 'flex';
+    container.style.animation = 'fadeIn 0.8s forwards';
+}
+
+function endGame(result) {
+    container.style.display = 'none';
+    const resultScreen = document.getElementById('result-screen');
+    const resultMessage = document.getElementById('result-message');
+    resultScreen.style.display = 'flex';
+
+    if(result === 'draw'){
+        resultMessage.textContent = "It's a Draw! 😐";
+    } else if(result === 'player'){
+        resultMessage.textContent = "You Win! ☺☺";
+    } else if(result === 'computer'){
+        resultMessage.textContent = "Computer Wins! ☹☹";
+    }
+}
+
+function restartGame() {
+    container.style.display = 'flex';
+    document.getElementById('result-screen').style.display = 'none';
+    resetGame();
+}
+</script>
+</body>
+</html>
